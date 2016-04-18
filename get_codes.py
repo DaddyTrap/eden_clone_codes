@@ -71,12 +71,20 @@ def getFileCode(txt):
         self.inTextarea = False
     def handle_data(self, data):
       if self.isRunning == False: return None
-      if self.inPre:
-        # self.Code.append(data)
+      if self.inPre or self.inTextarea:
         self.nowData += data
-      if self.inTextarea:
-        # self.Code.append(data)
-        self.nowData += data
+    def handle_entityref(self, data):
+      if self.inPre or self.inTextarea:
+        if data == 'nbsp':
+          self.nowData += ' '
+        elif data == 'lt':
+          self.nowData += '<'
+        elif data == 'gt':
+          self.nowData += '>'
+        elif data == 'amp':
+          self.nowData += '&'
+        elif data == 'quot':
+          self.nowData += '"'
 
   parser = CodeHTMLParser()
   parser.feed(txt)
@@ -129,7 +137,7 @@ postdata = {
   'next':'/m/ass/' + ass_id + '/'
 }
 postdata = urllib.urlencode(postdata)
-print postdata
+# print postdata
 
 # headers when second request
 headers = {

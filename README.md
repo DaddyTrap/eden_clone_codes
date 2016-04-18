@@ -19,8 +19,6 @@ Then, input your username, password and the assignment's id (please get it from 
 ## 3.TODO
 It is very imperfect that maybe anyone can contribute to this lovely tool. So, feel **FREE** to make Pull Request. I will be very grateful and accept your hard work (if the code work well).
 
-* Because python's HTMLParser work not very well in this program (when it parse, it will lose some character like '<', '>', '"' or etc), we have to fix this soon
-
 * Maybe we can implement the function "put the code in another path".
 
 * To be honest.....I know my code is messy or even unreadable, I hope I will have time to add some comment and make it better. Also, if you can understand my code, you can add comments on it!
