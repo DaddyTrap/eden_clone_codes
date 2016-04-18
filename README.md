@@ -7,6 +7,11 @@ Our TAs usually tell us that we should compile and debug our code in local compi
 Why not use ```clone``` like git's ```git clone```?
 
 ## 2.How to use it?
+
+Using **Python 2.7.10**, you can see the best performance because I use Python 2.7.10 to run/debug it.
+I don't want to force you to use it, but I can't make this program work in Python 3.4 now, because there are much code to modify.
+But I think downloading a Python of another version is not very difficult.....
+
 Just clone this repository, or only copy the .py file in it. Put the .py file to the folder you want to set your code.
 Then run it!
 In Windows, maybe you can double-click it and it runs itself.
@@ -14,7 +19,7 @@ In Linux, you may ```cd``` to your folder and ```python get_codes.py```.
 
 Then, input your username, password and the assignment's id (please get it from the browser's url).
 
-For example, if you want to clone **Digraph(DS)(15C++)**, whose url is **http://eden.sysu.edu.cn/m/ass/6183/**, then you should input "6183" (no quote).
+For example, if you want to clone **Digraph(DS)(15C++)**, whose url is **http://eden.sysu.edu.cn/m/ass/6183/**, then you should input "**6183**" (no quote).
 
 Then you can input a folder name, and the program will clone the files there.
 
