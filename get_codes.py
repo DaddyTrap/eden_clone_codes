@@ -2,6 +2,7 @@ import urllib2
 import urllib
 import cookielib
 import re
+import os
 from HTMLParser import HTMLParser
 
 def formatFileName(name = ''):
@@ -45,12 +46,13 @@ def getFileCode(txt):
           if i[0] == 'class':
             if i[1] == 'field-container':
               self.inContainerDiv = True
-      if tag == 'fieldset':
-        self.inFieldSet = True
-      if tag == 'pre':
-        self.inPre = True
-      if tag == 'textarea':
-        self.inTextarea = True
+      if self.inContainerDiv:
+        if tag == 'fieldset':
+          self.inFieldSet = True
+        if tag == 'pre':
+          self.inPre = True
+        if tag == 'textarea':
+          self.inTextarea = True
     def handle_endtag(self, tag):
       if self.isRunning == False: return None
       if self.inContainerDiv == True:
@@ -58,33 +60,34 @@ def getFileCode(txt):
           isRunning = False
         else:
           self.countDiv = self.countDiv - 1
-
-      if tag == 'fieldset':
-        self.inFieldSet = False
-      if tag == 'pre':
-        self.Code.append(self.nowData)
-        self.nowData = ''
-        self.inPre = False
-      if tag == 'textarea':
-        self.Code.append(self.nowData)
-        self.nowData = ''
-        self.inTextarea = False
+        if tag == 'fieldset':
+          self.inFieldSet = False
+        if tag == 'pre':
+          self.Code.append(self.nowData)
+          self.nowData = ''
+          self.inPre = False
+        if tag == 'textarea':
+          self.Code.append(self.nowData)
+          self.nowData = ''
+          self.inTextarea = False
     def handle_data(self, data):
       if self.isRunning == False: return None
-      if self.inPre or self.inTextarea:
-        self.nowData += data
+      if self.inContainerDiv:
+        if self.inPre or self.inTextarea:
+          self.nowData += data
     def handle_entityref(self, data):
-      if self.inPre or self.inTextarea:
-        if data == 'nbsp':
-          self.nowData += ' '
-        elif data == 'lt':
-          self.nowData += '<'
-        elif data == 'gt':
-          self.nowData += '>'
-        elif data == 'amp':
-          self.nowData += '&'
-        elif data == 'quot':
-          self.nowData += '"'
+      if self.inContainerDiv:
+        if self.inPre or self.inTextarea:
+          if data == 'nbsp':
+            self.nowData += ' '
+          elif data == 'lt':
+            self.nowData += '<'
+          elif data == 'gt':
+            self.nowData += '>'
+          elif data == 'amp':
+            self.nowData += '&'
+          elif data == 'quot':
+            self.nowData += '"'
 
   parser = CodeHTMLParser()
   parser.feed(txt)
@@ -92,12 +95,47 @@ def getFileCode(txt):
 
 
 cj = cookielib.CookieJar();
+username = ''
+password = ''
 
-username = raw_input("Please input your username: ")
-password = raw_input("Please input your password: ")
+
+config_file = None
+config_exist = False
+configs = []
+if os.path.exists(".eden_config"):
+  config_exist = True
+  config_file = open(".eden_config","r+")
+  for line in config_file:
+    configs.append(line)
+else:
+  config_exist = False
+
+if not config_exist:
+  username = raw_input("Please input your username: ")
+  password = raw_input("Please input your password: ")
+  yes_or_no = raw_input("Do you want to save your username and password, after which you can skip the input(y/n): ")
+  err = True
+  if yes_or_no.lower() == 'y' or yes_or_no.lower() == 'n':
+    err = False
+    if yes_or_no.lower() == 'y':
+      config_file = open(".eden_config", "w+")
+      config_file.write(username + '\n' + password)
+
+  while err:
+    yes_or_no = raw_input("Please input y/n")
+    if yes_or_no.lower() == 'y' or yes_or_no.lower() == 'n':
+      err = False
+      if yes_or_no.lower() == 'y':
+        config_file = open(".eden_config", "w+")
+        config_file.write(username + '\n' + password)
+else:
+  username = configs[0].replace('\n', '')
+  password = configs[1].replace('\n', '')
+  print username
+  print password
+
 ass_id   = raw_input("Please input the assignment id: ")
-path     = raw_input("Please input the path you want to save in: ")
-
+folder_name = raw_input("Please input folder's name you want: ")
 
 hosturl = 'http://eden.sysu.edu.cn/m/login/?next=/m/ass/' + ass_id + '/'
 posturl = 'http://eden.sysu.edu.cn/'
@@ -197,9 +235,18 @@ filename = getFileName(text)
 filecode = getFileCode(text)
 count = 0
 name_len = len(filename)
+if folder_name:
+  if os.path.exists(folder_name):
+    print 'folder exists'
+  else:
+    os.mkdir(folder_name)
 for (i,j) in zip(filecode, filename):
   if count < name_len:
-    f = open(j, 'w+')
+    f = None
+    if folder_name:
+      f = open(folder_name + '/' + j, 'w+')
+    else:
+      f = open(j, 'w+')
     f.write(i)
     f.close()
     # print filename[count]
@@ -208,3 +255,6 @@ for (i,j) in zip(filecode, filename):
     count = count + 1
 print count
 print 'Success'
+
+if config_file:
+  config_file.close()

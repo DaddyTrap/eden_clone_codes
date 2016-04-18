@@ -14,7 +14,12 @@ In Linux, you may ```cd``` to your folder and ```python get_codes.py```.
 
 Then, input your username, password and the assignment's id (please get it from the browser's url).
 
-**Please know that I haven't implement the function "put the code in another path", so when you see the output which says "Please input the path you want to save in: ", just ignore it and press enter (or you can input something, after which I will ignore it).**
+For example, if you want to clone **Digraph(DS)(15C++)**, whose url is **http://eden.sysu.edu.cn/m/ass/6183/**, then you should input "6183" (no quote).
+
+Then you can input a folder name, and the program will clone the files there.
+
+Now you can save your username and password in a file, so that you can skip the input next time.
+
 
 ## 3.TODO
 It is very imperfect that maybe anyone can contribute to this lovely tool. So, feel **FREE** to make Pull Request. I will be very grateful and accept your hard work (if the code work well).
