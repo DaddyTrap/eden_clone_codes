@@ -184,7 +184,7 @@ headers = {
   'Accept-Language':'zh-CN,zh;q=0.8',
   'Cache-Control':'max-age=0',
   'Connection':'keep-alive',
-  'Content-Length':114,
+  # 'Content-Length':114,
   'Content-Type':'application/x-www-form-urlencoded',
   'Cookie':'csrftoken=' + token,
   'Host':'eden.sysu.edu.cn',
