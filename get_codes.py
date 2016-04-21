@@ -131,8 +131,6 @@ if not config_exist:
 else:
   username = configs[0].replace('\n', '')
   password = configs[1].replace('\n', '')
-  print username
-  print password
 
 ass_id   = raw_input("Please input the assignment id: ")
 folder_name = raw_input("Please input folder's name you want: ")
@@ -155,7 +153,7 @@ opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
 urllib2.install_opener(opener);
 request = urllib2.Request(hosturl, None, cookie_headers)
 response = urllib2.urlopen(request);
-# print response.info()
+
 token = ''
 sessionid = ''
 # get the first csrftoken
@@ -175,7 +173,6 @@ postdata = {
   'next':'/m/ass/' + ass_id + '/'
 }
 postdata = urllib.urlencode(postdata)
-# print postdata
 
 # headers when second request
 headers = {
@@ -184,7 +181,6 @@ headers = {
   'Accept-Language':'zh-CN,zh;q=0.8',
   'Cache-Control':'max-age=0',
   'Connection':'keep-alive',
-  # 'Content-Length':114,
   'Content-Type':'application/x-www-form-urlencoded',
   'Cookie':'csrftoken=' + token,
   'Host':'eden.sysu.edu.cn',
@@ -206,10 +202,6 @@ for i in cj:
     sessionid = i.value
 
 
-# print response.info()
-# print 'I think my login success...'
-
-
 # now request to m/ass/$ass_id/
 headers = {
   'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -224,11 +216,9 @@ headers = {
   'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36'
 }
 
-# print headers
 request = urllib2.Request('http://eden.sysu.edu.cn/m/ass/' + ass_id + '/', None, headers)
 response = urllib2.urlopen(request)
 
-# print response.info()
 text = response.read()
 
 filename = getFileName(text)
@@ -249,12 +239,10 @@ for (i,j) in zip(filecode, filename):
       f = open(j, 'w+')
     f.write(i)
     f.close()
-    # print filename[count]
-    # print i
-    print j
+    print j + 'finished'
     count = count + 1
-print count
-print 'Success'
+print count + "file(s) copied"
+print 'Success!'
 
 if config_file:
   config_file.close()
