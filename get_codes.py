@@ -88,6 +88,8 @@ def getFileCode(txt):
             self.nowData += '&'
           elif data == 'quot':
             self.nowData += '"'
+          elif data == '#39':
+            self.nowData += "'"
 
   parser = CodeHTMLParser()
   parser.feed(txt)
@@ -239,9 +241,9 @@ for (i,j) in zip(filecode, filename):
       f = open(j, 'w+')
     f.write(i)
     f.close()
-    print j + 'finished'
+    print j + ' finished'
     count = count + 1
-print count + "file(s) copied"
+print str(count) + " file(s) copied"
 print 'Success!'
 
 if config_file:
