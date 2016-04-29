@@ -1,3 +1,7 @@
+# Now that eden can download the code as a .tar, this program may be used less. But [@iebb 's suggestion](https://github.com/DaddyTrap/eden_clone_codes/issues/3) is great!
+
+---
+
 # eden_clone_codes
 A python script to "clone" codes in [eden](http://eden.sysu.edu.cn/).
 
@@ -23,13 +27,13 @@ Now you can save your username and password in a file, so that you can skip the 
 
 ## 3.Update Notes
 
-0.Able to save username and password to skip inputting them next time. \(Thanks for **mgsweet**'s suggestion\)
+0.Able to save username and password to skip inputting them next time. \(Thanks for **mgsweet**'s [suggestion](https://github.com/DaddyTrap/eden_clone_codes/issues/1)\)
 
-1.Able to be used on Windows even without Python installed. \(Thanks for **iebb**'s suggestion\)
+1.Able to be used on Windows even without Python installed. \(Thanks for **iebb**'s [suggestion](https://github.com/DaddyTrap/eden_clone_codes/issues/3)\)
 
 2.Removed some useless comment.
 
-3.Now the program won't print your username and your password after saving them. \(Thanks for **Mensu**'s suggestion\)
+3.Now the program won't print your username and your password after saving them. \(Thanks for **Mensu**'s [suggestion](https://github.com/DaddyTrap/eden_clone_codes/issues/1)\)
 
 4.Able to be used by Python3. \(Thanks for **iebb**'s code\)
 
