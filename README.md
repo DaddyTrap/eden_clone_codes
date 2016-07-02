@@ -1,4 +1,6 @@
-# Now that eden can download the code as a .tar, this program may be used less. But [@iebb 's suggestion](https://github.com/DaddyTrap/eden_clone_codes/issues/3) is great!
+# This repo will NOT be updated because eden has changed to Matrix.
+
+# Maybe you can try [this](https://github.com/iebb/Maban).
 
 ---
 
